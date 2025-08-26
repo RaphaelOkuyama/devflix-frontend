@@ -1,6 +1,7 @@
 import Head from "next/head";
-import styles from "../styles/homeNoAuth.module.scss" 
+import styles from "../styles/HomeNoAuth.module.scss"
 import HeaderNoAuth from "../src/components/homeNoAuth/headerNoAuth";
+import PresentationSection from "../src/components/homeNoAuth/presentationSection";
 
 const HomeNotAuth = function () {
   return (
@@ -8,11 +9,14 @@ const HomeNotAuth = function () {
       <Head>
         <title>Devflix</title>
         <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon" />
-				<meta property="og:title" content="Devflix" key="title" />
-				<meta name="description" content="Tenha acesso aos melhores conteúdos sobre programação de uma forma simples e fácil."/>
+        <meta property="og:title" content="Devflix" key="title" />
+        <meta name="description" content="Tenha acesso aos melhores conteúdos sobre programação de uma forma simples e fácil." />
       </Head>
       <main>
-	    <HeaderNoAuth />
+        <div className={styles.sectionBackground}>
+          <HeaderNoAuth />
+          <PresentationSection />
+        </div>
       </main>
     </>
   );

@@ -4,11 +4,18 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 4px 0px;
-  gap: 30px;
+  padding: 6px 0px;
+  gap: 10px;
 }
+
+.ctaText {
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 5px;
+}
+
 .imgCta {
-  width: 20px;
+  width: 12px;
 }
 .nav {
   display: flex;
@@ -51,4 +58,9 @@
   .imgCta {
     margin: 0px 8px;
   }
+
+  .ctaText {
+  font-size: 13px;
+  margin-bottom: 5px;
+}
 }
