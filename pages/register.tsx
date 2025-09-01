@@ -35,10 +35,10 @@ const Register = function () {
             return;
         }
 
-        const { data } = await authService.register(params);
+        const { data, status } = await authService.register(params);
 
-        if (data.status === 201) {
-            router.push("/login?sucess=true");
+        if (status === 201) {
+            router.push("/login?registred=true");
         } else {
             setToastIsOpen(true);
             setTimeout(() => {
