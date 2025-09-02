@@ -28,22 +28,67 @@ const courseService = {
   },
 
   getFeaturedCourses: async () => {
+    const token = sessionStorage.getItem("devflix-token");
+
+    const res = await api
+      .get("/courses/featured", {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      })
+      .catch((error) => {
+        return error.response;
+      });
+
+    return res;
+  },
+
+  addToFav: async (courseId: number | string) => {
+    const token = sessionStorage.getItem("devflix-token");
+
+    const res = await api.post("/favorites", { courseId }, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+    )
+      .catch((error) => {
+        return error.response;
+      });
+
+    return res;
+  },
+
+  removeFav: async (courseId: number | string) => {
+    const token = sessionStorage.getItem("devflix-token");
+
+    const res = await api.delete("/favorites", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+      data: { courseId }
+    })
+      .catch((error) => {
+        return error.response;
+      });
+
+    return res;
+  },
+
+  getFavCourses: async () => {
 	const token = sessionStorage.getItem("devflix-token");
 
-  const res = await api
-  .get("/courses/featured", {
-   headers: {
-	   Authorization: `Bearer ${token}`,
-   },
-   })
-   .catch((error) => {
-   console.log(error.response.data.message);
+  const res = await api.get("/favorites", {
+		  headers: {
+		    Authorization: `Bearer ${token}`,
+	    },
+    })
+	  .catch((error) => {
+      return error.response;
+    });
 
-   return error.response;
-   });
-
-   return res;
-  },
+    return res;
+},
 };
 
 export default courseService
