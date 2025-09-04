@@ -91,6 +91,8 @@
   width: 550px;
 }
 .formBtn {
+  display:block;
+  margin: 15px auto;
   border-color: $lightRed;
   text-align: center;
   color: white;
@@ -128,6 +130,11 @@
     border-color: $lightRed;
     color: $lightGray;
   }
+  &:focus {
+    outline: none;
+    box-shadow: none;
+    background-color: transparent;
+  }  
 }
 
 @media (max-width: 992px) {
