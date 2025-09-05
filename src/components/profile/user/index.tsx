@@ -4,6 +4,7 @@ import { FormEvent, useEffect, useState } from "react";
 import profileService from "../../../services/profileService";
 import ToastComponent from "../../common/toast";
 import { useRouter } from "next/router";
+import Head from "next/head";
 
 const UserFrom = function () {
     const router = useRouter();
@@ -47,7 +48,7 @@ const UserFrom = function () {
             setErrorMessage("Informações alteradas com sucesso!");
             setColor("bg-success");
             setTimeout(() => setToastIsOpen(false), 1000 * 3);
-            if(email != inicialEmail) {
+            if (email != inicialEmail) {
                 sessionStorage.clear();
                 router.push('/')
             }
@@ -61,6 +62,11 @@ const UserFrom = function () {
 
     return (
         <>
+            <Head>
+                <title>Devflix - Meus Dados</title>
+                <link rel="shortcut icon" href="/favicon.svg" type="image/x-icon" />
+                <script src="https://jsuites.net/v4/jsuites.js"></script>
+            </Head>
             <Form className={styles.form} onSubmit={handleUserUpdate}>
                 <div className={styles.formName}>
                     <p className={styles.nameAbbreviation}>
@@ -127,6 +133,7 @@ const UserFrom = function () {
                             className={styles.input}
                             value={phone}
                             onChange={(event) => { setPhone(event.target.value) }}
+                            data-mask="[-]+55 (00) 00000-0000"
                         />
                     </FormGroup>
                     <FormGroup>
