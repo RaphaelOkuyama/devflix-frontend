@@ -7,9 +7,11 @@ import courseService, { CourseType } from "../src/services/courseService";
 import { Container } from "reactstrap";
 import SearchCard from "../src/components/searchCard";
 import Footer from "../src/components/common/footer";
+import PageSpinner from "../src/components/common/spinner";
 
 const Search = function () {
     const router = useRouter();
+    const [loading, setLoading] = useState(true);
     const searchName: any = router.query.name;
     const [searchResult, setSearchResult] = useState<CourseType[]>([]);
 
@@ -21,6 +23,18 @@ const Search = function () {
     useEffect(() => {
         searchCourses();
     }, [searchName]);
+
+    useEffect(() => {
+        if (!sessionStorage.getItem("devflix-token")) {
+            router.push("/login");
+        } else {
+            setLoading(false);
+        }
+    }, []);
+
+    if (loading) {
+        return <PageSpinner />;
+    }
 
     return (
         <>
@@ -34,16 +48,16 @@ const Search = function () {
                 </div>
                 <div className={styles.searchResult}>
                     {searchResult.length >= 1 ? (
-                    <Container className="d-flex flex-wrap justify-content-center gap-5 py-4">
-                        {searchResult?.map((course) => (
-                            <SearchCard key={course.id} course={course} />
-                        ))}
-                    </Container>
-                ) : (
-                    <p className={styles.noSearchText}>Nenhum resultado encontrado!</p>
-                )}
+                        <Container className="d-flex flex-wrap justify-content-center gap-5 py-4">
+                            {searchResult?.map((course) => (
+                                <SearchCard key={course.id} course={course} />
+                            ))}
+                        </Container>
+                    ) : (
+                        <p className={styles.noSearchText}>Nenhum resultado encontrado!</p>
+                    )}
                 </div>
-                
+
                 <div className={styles.footer}>
                     <Footer />
                 </div>
