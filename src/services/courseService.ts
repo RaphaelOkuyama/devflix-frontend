@@ -62,7 +62,7 @@ const courseService = {
   removeFav: async (courseId: number | string) => {
     const token = sessionStorage.getItem("devflix-token");
 
-    const res = await api.delete("/favorites", {
+    const res = await api.delete(`/favorites/${courseId}`, {
       headers: {
         Authorization: `Bearer ${token}`,
       },
@@ -116,7 +116,7 @@ const courseService = {
     const token = sessionStorage.getItem("devflix-token");
 
     const res = await api
-      .delete("/likes", {
+      .delete(`/likes/${courseId}`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },
